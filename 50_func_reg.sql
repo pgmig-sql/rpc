@@ -30,7 +30,7 @@ $_$
   BEGIN
     DELETE FROM func_anno WHERE code = a_code;
     IF a_anno IS NOT NULL THEN
-      PERFORM poma.comment('f', a_nspname || '.' || a_proname, a_anno);
+      PERFORM pgmig.comment('f', a_nspname || '.' || a_proname, a_anno);
     END IF;
     INSERT INTO func_anno (
         code,   nspname,   proname,   sample
@@ -50,7 +50,7 @@ $_$
   RETURN a_code;
 END;
 $_$;
-SELECT poma.comment('f', 'method', 'Register RPC method');
+SELECT pgmig.comment('f', 'method', 'Register RPC method');
 
 -- -----------------------------------------------------------------------------
 

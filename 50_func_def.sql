@@ -78,7 +78,7 @@ $_$
     RETURN;
   END;
 $_$;
-SELECT poma.comment('f', 'pg_func_args', 'Function arguments definition');
+SELECT pgmig.comment('f', 'pg_func_args', 'Function arguments definition');
 
 -- -----------------------------------------------------------------------------
 
@@ -142,4 +142,4 @@ $_$
     RETURN;
   END;
 $_$;
-SELECT poma.comment('f', 'pg_func_result', 'Function result of complex type columns definition');
+SELECT pgmig.comment('f', 'pg_func_result', 'Function result of complex type columns definition');

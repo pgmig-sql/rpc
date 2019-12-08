@@ -19,7 +19,7 @@ CREATE OR REPLACE VIEW func_def AS
   LEFT JOIN pg_type t ON (t.oid = p.prorettype)
   ORDER BY 1
 ;
-SELECT poma.comment('v', 'func_def', 'Атрибуты метода'
+SELECT pgmig.comment('v', 'func_def', 'Атрибуты метода'
 , 'code',    'Имя процедуры'
 , 'nspname', 'Имя схемы хранимой функции'
 , 'proname', 'Имя хранимой функции'
