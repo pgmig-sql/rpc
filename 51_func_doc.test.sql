@@ -1,11 +1,22 @@
 
+-- setup permissions if test_role given
+DO $_$
+  DECLARE
+    v_role TEXT := pgmig.var('test_role');
+  BEGIN
+    IF v_role IS NOT NULL THEN
+      EXECUTE format('set role %1$I', v_role);
+    END IF;
+  END;
+$_$ LANGUAGE plpgsql;
+
 SAVEPOINT test_begin;
-select assert_count(3);
+select pgmig.assert_count(3);
 
 -- -----------------------------------------------------------------------------
 
 --  метод rpc.index исключаем, т.к. он может отсутствовать, если переназначен в другом пакете
-SELECT assert_eq('index'
+SELECT pgmig.assert_eq('index'
 , (SELECT jsonb_agg(row_to_json(r)) FROM rpc.index('{rpc}') r WHERE code <> 'index' order by 1)
 , '[
   {
@@ -37,7 +48,7 @@ ROLLBACK TO SAVEPOINT test_begin;
 
 -- -----------------------------------------------------------------------------
 
-SELECT assert_eq('func_args'
+SELECT pgmig.assert_eq('func_args'
 , (SELECT row_to_json(r) FROM rpc.func_args('func_args') r)::jsonb
 , '{
         "arg": "a_code",
@@ -51,7 +62,7 @@ SELECT assert_eq('func_args'
 ROLLBACK TO SAVEPOINT test_begin;
 
 -- -----------------------------------------------------------------------------
-SELECT assert_eq('func_result'
+SELECT pgmig.assert_eq('func_result'
 , (SELECT jsonb_agg(row_to_json(r)) FROM rpc.func_result('func_args') r)
 , '[
         {
@@ -83,3 +94,4 @@ SELECT assert_eq('func_result'
 );
 
 ROLLBACK TO SAVEPOINT test_begin;
+RESET ROLE;

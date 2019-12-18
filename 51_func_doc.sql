@@ -7,7 +7,7 @@
 -- -----------------------------------------------------------------------------
 
 CREATE OR REPLACE FUNCTION index(a_nsp TEXT[] DEFAULT NULL) RETURNS SETOF func_def
-  STABLE LANGUAGE 'sql'
+  STABLE LANGUAGE 'sql' SECURITY DEFINER
 SET SEARCH_PATH FROM CURRENT AS
 $_$
   SELECT *
@@ -28,7 +28,7 @@ CREATE OR REPLACE FUNCTION func_args(a_code TEXT) RETURNS TABLE (
 , required BOOL
 , def_val  TEXT
 , anno     TEXT
-) STABLE LANGUAGE 'sql'
+) STABLE LANGUAGE 'sql' SECURITY DEFINER
 SET SEARCH_PATH FROM CURRENT AS
 $_$
   WITH q_def (n, p) AS (
@@ -57,7 +57,7 @@ CREATE OR REPLACE FUNCTION func_result(a_code TEXT) RETURNS TABLE (
   arg TEXT
 , type TEXT
 , anno TEXT
-) STABLE LANGUAGE 'sql'
+) STABLE LANGUAGE 'sql' SECURITY DEFINER
 SET SEARCH_PATH FROM CURRENT AS
 $_$
   WITH q_def (n, p) AS (
