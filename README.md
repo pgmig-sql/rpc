@@ -10,4 +10,4 @@ See enfist config at [dcape](https://github.com/dopos/dcape/tree/master/apps/enf
 
 The MIT License (MIT), see [LICENSE](LICENSE).
 
-Copyright (c) 2018 Aleksei Kovrizhkin <lekovr+poma@gmail.com>
+Copyright (c) 2017-2020 Aleksei Kovrizhkin <lekovr+apisite@gmail.com>
